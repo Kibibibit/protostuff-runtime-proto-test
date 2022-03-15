@@ -9,6 +9,9 @@ import com.dyuproject.protostuff.runtime.RuntimeSchema;
 import au.com.thewindmills.javaprotogen.marshaller.Marshaller;
 import au.com.thewindmills.javaprotogen.models.TestModel;
 import au.com.thewindmills.javaprotogen.models.TestSimpleModel;
+import io.github.classgraph.ClassGraph;
+import io.github.classgraph.ClassInfo;
+import io.github.classgraph.ScanResult;
 import io.quarkus.runtime.annotations.QuarkusMain;
 import life.genny.qwandaq.Answer;
 import life.genny.qwandaq.entity.BaseEntity;
@@ -19,9 +22,8 @@ import net.webby.protostuff.runtime.Generators;
  * Hello world!
  *
  */
-@QuarkusMain
 public class App {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ClassNotFoundException {
 
         System.out.println("Hello");
 
@@ -35,6 +37,18 @@ public class App {
         schemas.add(RuntimeSchema.getSchema(Answer.class));
         schemas.add(RuntimeSchema.getSchema(QBulkMessage.class));
         schemas.add(RuntimeSchema.getSchema(BaseEntity.class));
+
+        try (ScanResult scanResult =
+                new ClassGraph()
+                    .enableAnnotationInfo()
+                    .enableClassInfo()
+                    .acceptPackages("life.genny.qwandaq.entity")
+                    .scan()) {               // Start the scan
+            for (ClassInfo routeClassInfo : scanResult.getAllClasses()) {//scanResult.getClassesWithAnnotation("au.com.thewindmills.javaprotogen.annotations.ProtoMessage")) {
+                Class<?> clazzOf = Class.forName(routeClassInfo.getName());
+                System.out.println(clazzOf.getSimpleName());
+            }
+        }
 
         for (Schema<?> schema : schemas) {
             System.out.println("----------------------");
