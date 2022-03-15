@@ -1,0 +1,46 @@
+// --- AUTO-GENERATED PROTO FILE FOR: genny.proto ---
+
+syntax = "proto3";
+
+
+option java_multiple_files = true;
+option java_package = "life.genny.model.grpc.comms";
+option java_outer_classname = "GennyCommsProto";
+
+package genny;
+
+// -- Message for: TestSimpleModel
+message TestSimpleModel {
+	string name = 1;
+	int64 id = 2;
+}
+
+// -- Message for: TestSimpleModel
+message TestSimpleModel {
+	string name = 1;
+	int64 id = 2;
+}
+
+// -- Message for: TestSimpleModel
+message TestSimpleModel {
+	string name = 1;
+	int64 id = 2;
+}
+
+// -- Message for: TestSimpleModel
+message TestSimpleModel {
+	string name = 1;
+	int64 id = 2;
+}
+
+// -- Message for: TestSimpleModel
+message TestSimpleModel {
+	string name = 1;
+	int64 id = 2;
+}
+
+// -- Message for: TestSimpleModel
+message TestSimpleModel {
+	string name = 1;
+	int64 id = 2;
+}

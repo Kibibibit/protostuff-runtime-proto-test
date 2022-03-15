@@ -1,0 +1,8 @@
+au/com/thewindmills/javaprotogen/marshaller/JavaToProtoField.class
+au/com/thewindmills/javaprotogen/models/TestSimpleModel.class
+au/com/thewindmills/javaprotogen/models/TestModel.class
+au/com/thewindmills/javaprotogen/marshaller/Marshaller.class
+META-INF/panache-archive.marker
+au/com/thewindmills/javaprotogen/annotations/ProtoField.class
+au/com/thewindmills/javaprotogen/annotations/ProtoMessage.class
+au/com/thewindmills/javaprotogen/App.class
