@@ -10,7 +10,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import au.com.thewindmills.javaprotogen.annotations.ProtoField;
-import au.com.thewindmills.javaprotogen.annotations.ProtoMessage;
+import life.genny.qwandaq.annotation.ProtoMessage;
 
 public class Marshaller {
 

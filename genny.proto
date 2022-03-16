@@ -56,3 +56,21 @@ message TestSimpleModel {
 	string name = 1;
 	int64 id = 2;
 }
+
+// -- Message for: TestSimpleModel
+message TestSimpleModel {
+	string name = 1;
+	int64 id = 2;
+}
+
+// -- Message for: TestSimpleModel
+message TestSimpleModel {
+	string name = 1;
+	int64 id = 2;
+}
+
+// -- Message for: TestSimpleModel
+message TestSimpleModel {
+	string name = 1;
+	int64 id = 2;
+}

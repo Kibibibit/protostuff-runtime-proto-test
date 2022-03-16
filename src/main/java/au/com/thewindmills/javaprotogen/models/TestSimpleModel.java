@@ -1,9 +1,7 @@
 package au.com.thewindmills.javaprotogen.models;
 
 import au.com.thewindmills.javaprotogen.annotations.ProtoField;
-import au.com.thewindmills.javaprotogen.annotations.ProtoMessage;
 
-@ProtoMessage
 public class TestSimpleModel {
 
     @ProtoField
