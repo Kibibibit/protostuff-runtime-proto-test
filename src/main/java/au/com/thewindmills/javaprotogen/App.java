@@ -52,14 +52,14 @@ public class App {
         Set<String> messages = new HashSet<String>();
         String header = getProtoHeader(classes.get(0));
         System.out.println(header);
-        for(Class<?> clazz : classes) {
-            // generateProtoToFile(PROTO_DIRECTORY, clazz);
-            Set<String> clazzMsgs = getMessages(clazz);
-            int newMsgs = clazzMsgs.size();
-            int oldMsgCount = messages.size();
-            messages.addAll(clazzMsgs);
-            System.out.println("Added " + (messages.size() - oldMsgCount) + " messages to message stack of " + newMsgs + " new messages");
-        }
+        classes.parallelStream().forEach((clazz) -> {
+                String content = generateProtoToFile(clazz);
+                Set<String> clazzMsgs = getMessages(content);
+                int newMsgs = clazzMsgs.size();
+                int oldMsgCount = messages.size();
+                messages.addAll(clazzMsgs);
+                System.out.println("Added " + (messages.size() - oldMsgCount) + " messages to message stack of " + newMsgs + " new messages");
+        });
 
         // Generate a big proto
         
@@ -97,10 +97,7 @@ public class App {
         return header;
     }
 
-    public static Set<String> getMessages(Class<?> clazz) {
-        Schema<?> schema = RuntimeSchema.getSchema(clazz);
-        ProtoGenerator generator = Generators.newProtoGenerator(schema);
-        String content = generator.generate();
+    public static Set<String> getMessages(final String content) {
         String[] contents = content.split("\n");
         boolean foundMessage = false;
         String currentMessage = "";
@@ -122,27 +119,27 @@ public class App {
         return messages;
     }
 
-    private static boolean generateProtoToFile(String absoluteDir, Class<?> classToSerialise) {
+    private static String generateProtoToFile(Class<?> classToSerialise) {
         Schema<?> schema = RuntimeSchema.getSchema(classToSerialise);
         System.out.println("----------" + schema.messageName()+ "----------");
         String content = Generators.newProtoGenerator(schema).generate();
         // System.out.println(content);
-        String fileName = absoluteDir + schema.messageName() + ".proto";
+        String fileName = PROTO_DIRECTORY + schema.messageName() + ".proto";
         File file = new File(fileName);
         try {
             file.createNewFile();
         } catch(IOException e) {
             System.err.println("Failed to create new file: " + fileName);
             e.printStackTrace();
-            return false;
+            return "";
         }
         try(FileWriter fw = new FileWriter(fileName)) {
             BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, true));
             writer.write(content);
             writer.close();
         } catch(IOException e) {
-            return false;
+            return "";
         }
-        return true;
+        return content;
     }
 }
